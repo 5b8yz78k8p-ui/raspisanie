@@ -6,180 +6,83 @@
 <title>Моё расписание</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'Segoe UI', Arial, sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
-    min-height: 100vh;
-    padding: 20px;
-    color: #333;
+    min-height: 100vh; padding: 20px; color: #333;
   }
-
   .container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 16px;
-    padding: 30px;
+    max-width: 800px; margin: 0 auto; background: #fff;
+    border-radius: 16px; padding: 25px;
     box-shadow: 0 20px 50px rgba(0,0,0,0.25);
   }
-
-  h1 {
-    text-align: center;
-    color: #4a3f8a;
-    margin-bottom: 25px;
-    font-size: 28px;
-  }
-
-  h2 {
-    color: #4a3f8a;
-    margin-bottom: 15px;
-    font-size: 20px;
-  }
-
+  h1 { text-align: center; color: #4a3f8a; margin-bottom: 20px; font-size: 26px; }
+  .info { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
   .day-block {
-    margin-bottom: 20px;
-    padding: 15px;
-    background: #f7f7fb;
-    border-radius: 10px;
-    border-left: 4px solid #667eea;
+    margin-bottom: 15px; padding: 12px; background: #f7f7fb;
+    border-radius: 10px; border-left: 4px solid #667eea;
   }
-
   .day-block label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #4a3f8a;
+    display: block; font-weight: bold; margin-bottom: 6px; color: #4a3f8a;
   }
-
   textarea {
-    width: 100%;
-    min-height: 80px;
-    padding: 10px;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    font-size: 14px;
-    font-family: inherit;
-    resize: vertical;
-    transition: border 0.2s;
+    width: 100%; min-height: 70px; padding: 10px;
+    border: 2px solid #ddd; border-radius: 8px;
+    font-size: 14px; font-family: inherit; resize: vertical;
   }
-
-  textarea:focus {
-    outline: none;
-    border-color: #667eea;
-  }
-
+  textarea:focus { outline: none; border-color: #667eea; }
   button {
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: transform 0.1s, box-shadow 0.2s;
+    padding: 12px 24px; font-size: 16px; border: none;
+    border-radius: 8px; cursor: pointer; font-weight: bold;
   }
-
-  button:hover { transform: translateY(-2px); }
-  button:active { transform: translateY(0); }
-
   .btn-primary {
     background: linear-gradient(135deg, #667eea, #764ba2);
-    color: #fff;
-    width: 100%;
+    color: #fff; width: 100%;
     box-shadow: 0 4px 15px rgba(102,126,234,0.4);
   }
-
-  .btn-secondary {
-    background: #eee;
-    color: #4a3f8a;
-    margin-right: 10px;
-  }
-
-  .btn-danger {
-    background: #ff5757;
-    color: #fff;
-  }
-
-  .actions {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
+  .btn-secondary { background: #eee; color: #4a3f8a; margin-right: 10px; }
+  .btn-danger { background: #ff5757; color: #fff; }
+  .actions { margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
   .hidden { display: none; }
-
-  .schedule-view {
-    display: grid;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-
   .schedule-card {
-    padding: 15px;
-    background: #f7f7fb;
-    border-radius: 10px;
-    border-left: 4px solid #764ba2;
+    padding: 15px; background: #f7f7fb; border-radius: 10px;
+    border-left: 4px solid #764ba2; margin-bottom: 12px;
   }
-
-  .schedule-card h3 {
-    color: #4a3f8a;
-    margin-bottom: 8px;
-    font-size: 17px;
-  }
-
-  .schedule-card ul {
-    list-style: none;
-    padding-left: 0;
-  }
-
+  .schedule-card h3 { color: #4a3f8a; margin-bottom: 8px; font-size: 17px; }
+  .schedule-card ul { list-style: none; }
   .schedule-card li {
-    padding: 6px 0;
-    padding-left: 22px;
-    position: relative;
-    border-bottom: 1px dashed #ddd;
+    padding: 6px 0 6px 22px; position: relative; border-bottom: 1px dashed #ddd;
   }
-
   .schedule-card li:last-child { border-bottom: none; }
-
-  .schedule-card li::before {
-    content: "📘";
-    position: absolute;
-    left: 0;
-  }
-
-  .empty {
-    color: #999;
-    font-style: italic;
-    padding-left: 0 !important;
-  }
-
+  .schedule-card li::before { content: "📘"; position: absolute; left: 0; }
+  .empty { color: #999; font-style: italic; padding-left: 0 !important; }
   .empty::before { content: "" !important; }
-
-  .info {
-    text-align: center;
-    color: #666;
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>📅 Моё расписание</h1>
 
-  <!-- Экран ввода -->
+  <!-- ФОРМА (дни прописаны прямо в HTML) -->
   <div id="editScreen">
     <p class="info" id="editInfo"></p>
-    <div id="daysInput"></div>
+
+    <div class="day-block"><label>Понедельник</label><textarea data-day="Понедельник"></textarea></div>
+    <div class="day-block"><label>Вторник</label><textarea data-day="Вторник"></textarea></div>
+    <div class="day-block"><label>Среда</label><textarea data-day="Среда"></textarea></div>
+    <div class="day-block"><label>Четверг</label><textarea data-day="Четверг"></textarea></div>
+    <div class="day-block"><label>Пятница</label><textarea data-day="Пятница"></textarea></div>
+    <div class="day-block"><label>Суббота</label><textarea data-day="Суббота"></textarea></div>
+    <div class="day-block"><label>Воскресенье</label><textarea data-day="Воскресенье"></textarea></div>
+
     <div class="actions">
       <button class="btn-primary" id="saveBtn">💾 Сохранить расписание</button>
     </div>
   </div>
 
-  <!-- Экран просмотра -->
+  <!-- ПРОСМОТР -->
   <div id="viewScreen" class="hidden">
-    <div class="schedule-view" id="scheduleView"></div>
+    <div id="scheduleView"></div>
     <div class="actions">
       <button class="btn-secondary" id="editBtn">✏️ Изменить</button>
       <button class="btn-danger" id="resetBtn">🗑️ Сбросить всё</button>
@@ -188,110 +91,79 @@
 </div>
 
 <script>
-  const DAYS = ["Понедельник", "Вторник", "Среда", "Четверг",
-                "Пятница", "Суббота", "Воскресенье"];
+  const DAYS = ["Понедельник","Вторник","Среда","Четверг","Пятница","Суббота","Воскресенье"];
   const STORAGE_KEY = "mySchedule";
 
   const editScreen = document.getElementById("editScreen");
   const viewScreen = document.getElementById("viewScreen");
-  const daysInput = document.getElementById("daysInput");
   const scheduleView = document.getElementById("scheduleView");
   const editInfo = document.getElementById("editInfo");
 
-  // Загрузка из localStorage
   function loadSchedule() {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : null;
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : null;
+    } catch(e) { return null; }
   }
-
-  // Сохранение
-  function saveToStorage(schedule) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(schedule));
+  function saveToStorage(s) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
   }
-
-  // Построение формы ввода
-  function buildForm(schedule) {
-    daysInput.innerHTML = "";
-    DAYS.forEach(day => {
-      const text = schedule && schedule[day] ? schedule[day].join("\n") : "";
-      const block = document.createElement("div");
-      block.className = "day-block";
-      block.innerHTML = `
-        <label>${day}</label>
-        <textarea data-day="${day}" placeholder="Одно занятие на строку">${text}</textarea>
-      `;
-      daysInput.appendChild(block);
-    });
-  }
-
-  // Показать форму ввода
-  function showEdit(isFirstTime) {
-    const schedule = loadSchedule();
-    editInfo.textContent = isFirstTime
-      ? "Введи своё расписание на неделю. Одно занятие — одна строка."
-      : "Измени нужные дни и нажми «Сохранить».";
-    buildForm(schedule);
-    editScreen.classList.remove("hidden");
-    viewScreen.classList.add("hidden");
-  }
-
-  // Показать расписание
-  function showView() {
-    const schedule = loadSchedule();
-    scheduleView.innerHTML = "";
-
-    DAYS.forEach(day => {
-      const lessons = (schedule && schedule[day]) ? schedule[day] : [];
-      const card = document.createElement("div");
-      card.className = "schedule-card";
-
-      let listHTML = "";
-      if (lessons.length === 0) {
-        listHTML = `<li class="empty">(нет занятий)</li>`;
-      } else {
-        listHTML = lessons.map(l => `<li>${escapeHtml(l)}</li>`).join("");
-      }
-
-      card.innerHTML = `<h3>${day}</h3><ul>${listHTML}</ul>`;
-      scheduleView.appendChild(card);
-    });
-
-    editScreen.classList.add("hidden");
-    viewScreen.classList.remove("hidden");
-  }
-
-  // Защита от вставки HTML
   function escapeHtml(str) {
     const div = document.createElement("div");
     div.textContent = str;
     return div.innerHTML;
   }
 
-  // Сбор данных из формы
+  // Заполнить textarea значениями из сохранённого расписания
+  function fillForm(schedule) {
+    document.querySelectorAll("textarea[data-day]").forEach(ta => {
+      const day = ta.getAttribute("data-day");
+      const arr = (schedule && schedule[day]) ? schedule[day] : [];
+      ta.value = arr.join("\n");
+    });
+  }
+
+  function showEdit(isFirstTime) {
+    const schedule = loadSchedule();
+    editInfo.textContent = isFirstTime
+      ? "Введи своё расписание. Одно занятие — одна строка."
+      : "Измени нужные дни и нажми «Сохранить».";
+    fillForm(schedule);
+    editScreen.classList.remove("hidden");
+    viewScreen.classList.add("hidden");
+  }
+
+  function showView() {
+    const schedule = loadSchedule();
+    scheduleView.innerHTML = "";
+    DAYS.forEach(day => {
+      const lessons = (schedule && schedule[day]) ? schedule[day] : [];
+      const card = document.createElement("div");
+      card.className = "schedule-card";
+      let listHTML = lessons.length
+        ? lessons.map(l => "<li>" + escapeHtml(l) + "</li>").join("")
+        : '<li class="empty">(нет занятий)</li>';
+      card.innerHTML = "<h3>" + day + "</h3><ul>" + listHTML + "</ul>";
+      scheduleView.appendChild(card);
+    });
+    editScreen.classList.add("hidden");
+    viewScreen.classList.remove("hidden");
+  }
+
   function collectForm() {
     const schedule = {};
     document.querySelectorAll("textarea[data-day]").forEach(ta => {
-      const day = ta.dataset.day;
-      const lessons = ta.value
-        .split("\n")
-        .map(s => s.trim())
-        .filter(s => s.length > 0);
-      schedule[day] = lessons;
+      const day = ta.getAttribute("data-day");
+      schedule[day] = ta.value.split("\n").map(s => s.trim()).filter(s => s.length);
     });
     return schedule;
   }
 
-  // Обработчики
   document.getElementById("saveBtn").addEventListener("click", () => {
-    const schedule = collectForm();
-    saveToStorage(schedule);
+    saveToStorage(collectForm());
     showView();
   });
-
-  document.getElementById("editBtn").addEventListener("click", () => {
-    showEdit(false);
-  });
-
+  document.getElementById("editBtn").addEventListener("click", () => showEdit(false));
   document.getElementById("resetBtn").addEventListener("click", () => {
     if (confirm("Точно удалить всё расписание?")) {
       localStorage.removeItem(STORAGE_KEY);
@@ -300,12 +172,8 @@
   });
 
   // Запуск
-  const existing = loadSchedule();
-  if (existing) {
-    showView();
-  } else {
-    showEdit(true);
-  }
+  if (loadSchedule()) showView();
+  else showEdit(true);
 </script>
 </body>
 </html>
